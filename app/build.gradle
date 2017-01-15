@@ -46,6 +46,46 @@ dependencies {
 //    compile "com.trello:rxlifecycle-kotlin:$rxLifecycleVersion"
 //    compile "com.trello:rxlifecycle-components:$rxLifecycleVersion"
 
+    // DI
+    compile 'com.google.dagger:dagger:2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    // Logger
+    compile 'com.jakewharton.timber:timber:3.1.0'
+
+    // Image downloader & transformer
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.makeramen:roundedimageview:2.0.1'
+
+    // JSON library
+    compile 'com.google.code.gson:gson:2.3.1'
+
+    // Reactive library
+    compile 'io.reactivex:rxjava:1.0.10'
+    compile 'com.ogaclejapan:rxbinding:1.1.1@aar'
+
+    // View library
+    compile 'com.ogaclejapan.arclayout:library:1.0.1@aar'
+    compile 'com.ogaclejapan.smarttablayout:library:1.1.3@aar'
+    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.1.3@aar'
+    compile 'com.twotoasters.jazzylistview:library:1.2.1'
+    compile 'com.sothree.slidinguppanel:library:3.0.0@aar'
+    compile 'com.nispok:snackbar:2.10.8'
+
+    // Custom font library
+    compile 'com.norbsoft.typefacehelper:library:0.9.0@aar'
+
+    // HTML Parser
+    compile 'org.jsoup:jsoup:1.8.1'
+
+    // Memory leak detection
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+
+    // Debug bridge
+    debugCompile 'com.facebook.stetho:stetho:1.1.1'
+    debugCompile 'com.facebook.stetho:stetho-okhttp:1.1.1'
+    debugCompile 'com.facebook.stetho:stetho-timber:1.1.1'
 
 }
 repositories {
