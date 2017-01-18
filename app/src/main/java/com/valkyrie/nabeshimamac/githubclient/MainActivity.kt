@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             val usersList = findViewById(R.id.list_view) as ListView
             usersList.setAdapter(adapter)
+
         }
     }
 
