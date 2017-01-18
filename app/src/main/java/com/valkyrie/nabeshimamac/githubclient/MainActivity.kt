@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import rx.android.schedulers.AndroidSchedulers
@@ -15,12 +17,22 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
     private var listAdapter: ArticleAdapter by Delegates.notNull()
 
+    //private Animation mAnimation;
+    //Java
+    private var mAnimation: Animation by Delegates.notNull()
+            //TODO Delegatesの.の後ろ、選択肢どれ選んだらいいかわからないです
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         listAdapter = ArticleAdapter(applicationContext)
+
+        //mAnimation = AnimationUtils.loadAnimation(context, R.anim.item_enter_anim)
+        //Java
+        mAnimation = AnimationUtils.loadAnimation(findViewById(R.anim.item_enter_anim))
+        //TODO ﾝﾝﾝﾝﾝwwwわからんwww必要なのがContextで探してるのがView?
 
         GithubClient.service.newRepositories()
                 .subscribeOn(Schedulers.io())
@@ -48,4 +60,5 @@ class MainActivity : AppCompatActivity() {
             usersList.setAdapter(adapter)
         }
     }
+
 }
