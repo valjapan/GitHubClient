@@ -17,11 +17,7 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
     private var listAdapter: ArticleAdapter by Delegates.notNull()
 
-    //private Animation mAnimation;
-    //Java
     private var mAnimation: Animation by Delegates.notNull()
-            //TODO Delegatesの.の後ろ、選択肢どれ選んだらいいかわからないです
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         //mAnimation = AnimationUtils.loadAnimation(context, R.anim.item_enter_anim)
         //Java
-        mAnimation = AnimationUtils.loadAnimation(findViewById(R.anim.item_enter_anim))
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.item_enter_anim)
         //TODO ﾝﾝﾝﾝﾝwwwわからんwww必要なのがContextで探してるのがView?
 
         GithubClient.service.newRepositories()
