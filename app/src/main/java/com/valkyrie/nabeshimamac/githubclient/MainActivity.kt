@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import rx.android.schedulers.AndroidSchedulers
@@ -15,12 +17,25 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
     private var listAdapter: ArticleAdapter by Delegates.notNull()
 
+    private var mAnimation: Animation by Delegates.notNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listAdapter = ArticleAdapter(applicationContext)
+        listAdapter = ArticleAdapter(applicationContext).apply {
+            listener = object : ArticleAdapter.OnItemClickListener {
+                override fun onItemClick(repositories: Repositories) {
+                    ArticleActivity.intent(this@MainActivity, repositories).let {
+                        startActivity(it)
+                    }
+                }
+            }
+        }
+
+        //mAnimation = AnimationUtils.loadAnimation(context, R.anim.item_enter_anim)
+        //Java
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.item_enter_anim)
 
         GithubClient.service.newRepositories()
                 .subscribeOn(Schedulers.io())
@@ -37,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         listView.layoutManager = LinearLayoutManager(this)
         listView.adapter = listAdapter
     }
-
 
     private fun setUsersToListView(names: List<String>) {
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)

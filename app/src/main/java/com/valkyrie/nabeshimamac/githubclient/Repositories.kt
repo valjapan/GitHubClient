@@ -4,14 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Repositories(val id: Int,
-                   val name: String,
-                   val description: String) : Parcelable {
+                        val name: String,
+                        val description: String,
+                        val full_name: String) : Parcelable {
 
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<Repositories> = object : Parcelable.Creator<Repositories> {
             override fun createFromParcel(source: Parcel): Repositories = source.run {
-                Repositories(readInt(), readString(), readString())
+                Repositories(readInt(), readString(), readString(), readString())
             }
 
             override fun newArray(size: Int): Array<Repositories?> = kotlin.arrayOfNulls(size)
@@ -25,6 +26,7 @@ data class Repositories(val id: Int,
             writeInt(id)
             writeString(name)
             writeString(description)
+            writeString(full_name)
         }
     }
 }

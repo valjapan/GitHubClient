@@ -36,6 +36,8 @@ class ArticleView : FrameLayout {
 
     val descriptionTextView: TextView by bindView(R.id.description_text_view)
 
+    val urlTextView: TextView by bindView(R.id.url_text_view)
+
 //    init {
 //        LayoutInflater.from(context).inflate(R.layout.content_article_view, this)
 //        profileImageView = findViewById(R.id.profile_image_view) as ImageView
@@ -47,6 +49,6 @@ class ArticleView : FrameLayout {
         idTextView.text = article.id.toString()
         nameTextView.text = article.name
         descriptionTextView.text = article.description
+        urlTextView.text = article.full_name
     }
-
 }
