@@ -12,12 +12,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.valkyrie.nabeshimamac.githubclient.MainActivity">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/profile_image_view"-->
-        <!--android:layout_width="60dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--tools:background="#f00" />-->
 
     <TextView
         android:id="@+id/id_text_view"

@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.webkit.WebView
+import android.util.Log
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import us.feras.mdv.MarkdownView
 
 class ArticleActivity : AppCompatActivity() {
 
@@ -18,11 +21,22 @@ class ArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
-        val webView = findViewById(R.id.web_view) as WebView
         val repositories: Repositories = intent.getParcelableExtra(REPOSITORIES_EXTRA)
 
+        val markdownView: MarkdownView = findViewById(R.id.markdownView) as MarkdownView
 
-        webView.loadUrl("https://github.com/${repositories.full_name}")
+        // owner/repos
+        val strList = repositories.full_name.split('/')
+        Log.d("LOGGER", "${strList[0]} : ${strList[1]}")
+        // strlist[0] + " : " + strlist[1] -> "${strlist[0]} : ${strlist[1]}"
 
+        GithubClient.service.getReadMe(strList[0], strList[1])
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ x ->
+                    markdownView.loadMarkdownFile(x.download_url)
+                }, { error ->
+                    Log.e("ERROR", error.message)
+                })
     }
 }
