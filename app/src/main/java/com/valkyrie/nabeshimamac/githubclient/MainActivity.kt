@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.githubclient
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -7,8 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import kotlin.properties.Delegates
@@ -18,6 +20,15 @@ class MainActivity : AppCompatActivity() {
     private var listAdapter: ArticleAdapter by Delegates.notNull()
 
     private var mAnimation: Animation by Delegates.notNull()
+
+    private var spinner: Spinner by Delegates.notNull()
+
+    private var gitHubApi: GithubAPI by Delegates.notNull()
+
+    private var searchEditText: EditText by Delegates.notNull()
+
+    private var searchButton: ImageButton by Delegates.notNull()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +58,36 @@ class MainActivity : AppCompatActivity() {
                     Log.e("ERROR", error.message)
                 })
 
+
         val listView: RecyclerView = findViewById(R.id.list_view) as RecyclerView
+        searchEditText = findViewById(R.id.search_edit_text) as EditText
 
         listView.layoutManager = LinearLayoutManager(this)
         listView.adapter = listAdapter
+
+        spinner = findViewById(R.id.code_spinner) as Spinner
+
+        val list: List<String> = mutableListOf(
+                "C", "C++", "CSS", "Go", "HTML", "Java", "JavaScript", "Kotlin",
+                "Objective-C", "PHP", "Python", "Ruby", "Scala", "Shell", "Swift")
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        searchEditText.setOnEditorActionListener { textView, actionId, keyEvent ->
+            if (actionId === EditorInfo.IME_ACTION_DONE) {
+                //キーボードを非表示
+                (this@MainActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromInputMethod(searchEditText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+//                search(searchEditText.text.toString())
+                true
+            }
+            false
+        }
+        searchButton = findViewById(R.id.search_button) as ImageButton
+        searchButton.setOnClickListener {
+//            search(searchEditText.text.toString())
+        }
+
     }
 
     private fun setUsersToListView(names: List<String>) {
@@ -62,4 +99,17 @@ class MainActivity : AppCompatActivity() {
             usersList.setAdapter(adapter)
         }
     }
+
+//    private fun search(text: String) {
+//        gitHubApi.searchRepositories(text)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ x ->
+//                    searchEditText.text.clear()
+//                    listAdapter.articles = x
+//                    listAdapter.notifyDataSetChanged()
+//                }, { error ->
+//                    Log.e("ERROR", error.message)
+//                })
+//    }
 }
