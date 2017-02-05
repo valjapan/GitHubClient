@@ -23,12 +23,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listAdapter = ArticleAdapter(applicationContext)
+        listAdapter = ArticleAdapter(applicationContext).apply {
+            listener = object : ArticleAdapter.OnItemClickListener {
+                override fun onItemClick(repositories: Repositories) {
+                    ArticleActivity.intent(this@MainActivity, repositories).let {
+                        startActivity(it)
+                    }
+                }
+            }
+        }
 
         //mAnimation = AnimationUtils.loadAnimation(context, R.anim.item_enter_anim)
         //Java
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.item_enter_anim)
-        //TODO ﾝﾝﾝﾝﾝwwwわからんwww必要なのがContextで探してるのがView?
 
         GithubClient.service.newRepositories()
                 .subscribeOn(Schedulers.io())
@@ -46,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = listAdapter
     }
 
-
     private fun setUsersToListView(names: List<String>) {
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
         adapter.addAll(names)
@@ -54,8 +60,6 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             val usersList = findViewById(R.id.list_view) as ListView
             usersList.setAdapter(adapter)
-
         }
     }
-
 }

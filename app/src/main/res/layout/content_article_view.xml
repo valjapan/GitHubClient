@@ -52,4 +52,15 @@
         android:textSize="14sp"
         tools:text="Description"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/url_text_view"
+        android:layout_alignStart="@+id/description_text_view"
+        android:layout_below="@+id/description_text_view"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        tools:text="URL"/>
+
 </RelativeLayout>

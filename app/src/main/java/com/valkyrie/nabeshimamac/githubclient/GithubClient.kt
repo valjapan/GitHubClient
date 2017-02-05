@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by NabeshimaMAC on 2017/01/08.
  */
 object GithubClient {
+
     private val _endPoint = "https://api.github.com"
     var service: GithubAPI
 

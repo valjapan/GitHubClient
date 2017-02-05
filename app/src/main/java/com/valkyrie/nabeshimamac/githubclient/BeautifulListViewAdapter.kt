@@ -39,15 +39,15 @@ class BeautifulListViewAdapter(private val mContext: Context, private val mList:
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.content_article_view, parent, false)
             holder = ViewHolder(convertView)
-
             convertView!!.tag = holder
         } else {
             holder = convertView.tag as ViewHolder
         }
-        holder.idTextView.text = getItem(position).toString()
-        holder.nameTextView.text = getItem(position).toString()
-        holder.descriptionTextView.text = getItem(position).toString()
 
+        holder.idTextView.text = (getItem(position) as Repositories).id.toString()
+        holder.nameTextView.text = (getItem(position) as Repositories).name
+        holder.descriptionTextView.text = (getItem(position) as Repositories).description
+        holder.urlTextView.text = (getItem(position) as Repositories).full_name
 
         convertView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.item_enter_anim))
 
@@ -56,19 +56,16 @@ class BeautifulListViewAdapter(private val mContext: Context, private val mList:
 
     class ViewHolder(view: View) {
 
-
         internal var idTextView: TextView
-
         internal var nameTextView: TextView
-
         internal var descriptionTextView: TextView
-
+        internal var urlTextView: TextView
 
         init {
             idTextView = view.findViewById(R.id.id_text_view) as TextView
             nameTextView = view.findViewById(R.id.user_name_text_view) as TextView
             descriptionTextView = view.findViewById(R.id.description_text_view) as TextView
-
+            urlTextView = view.findViewById(R.id.url_text_view) as TextView
         }
     }
 }
