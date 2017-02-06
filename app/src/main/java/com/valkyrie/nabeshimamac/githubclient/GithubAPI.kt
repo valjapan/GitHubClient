@@ -15,6 +15,6 @@ interface GithubAPI {
     @GET("/repos/{owner}/{repo}/readme")
     fun getReadMe(@Path("owner") owner: String, @Path("repo") repo: String): Observable<ReadMe>
 
-    @GET("https://api.github.com/search/repositories?q={search_word}&sort=stars&order=desc")
-    fun searchRepositories(@Query("search_word") searchWord: String): Observable<Repositories>
+    @GET("https://api.github.com/search/repositories?q={search_word}&sort={sort}&order=desc")
+    fun searchRepositories(@Query("search_word") searchWord: String,@Query("sort")sort:String):Observable<List<Repositories>>
 }

@@ -50,6 +50,7 @@
             android:id="@+id/search_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@drawable/ic_search_black_48dp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 </RelativeLayout>

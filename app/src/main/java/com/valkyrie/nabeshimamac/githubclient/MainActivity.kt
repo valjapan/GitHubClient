@@ -18,17 +18,11 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     private var listAdapter: ArticleAdapter by Delegates.notNull()
-
     private var mAnimation: Animation by Delegates.notNull()
-
     private var spinner: Spinner by Delegates.notNull()
-
-    private var gitHubApi: GithubAPI by Delegates.notNull()
-
     private var searchEditText: EditText by Delegates.notNull()
-
     private var searchButton: ImageButton by Delegates.notNull()
-
+    var repositories: Repositories by Delegates.notNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,14 +72,14 @@ class MainActivity : AppCompatActivity() {
             if (actionId === EditorInfo.IME_ACTION_DONE) {
                 //キーボードを非表示
                 (this@MainActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromInputMethod(searchEditText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-//                search(searchEditText.text.toString())
+                Repositories.search(searchEditText.text.toString())
                 true
             }
             false
         }
         searchButton = findViewById(R.id.search_button) as ImageButton
         searchButton.setOnClickListener {
-//            search(searchEditText.text.toString())
+            repositories.javaClass.superclass.search(searchEditText.text.toString())
         }
 
     }
@@ -100,16 +94,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun search(text: String) {
-//        gitHubApi.searchRepositories(text)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({ x ->
-//                    searchEditText.text.clear()
-//                    listAdapter.articles = x
-//                    listAdapter.notifyDataSetChanged()
-//                }, { error ->
-//                    Log.e("ERROR", error.message)
-//                })
-//    }
 }
