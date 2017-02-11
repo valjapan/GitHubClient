@@ -1,6 +1,7 @@
 package com.valkyrie.nabeshimamac.githubclient
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +15,9 @@ object GithubClient {
     var service: GithubAPI
 
     init {
-        val okClient = OkHttpClient()
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val okClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
         val builder = Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(_endPoint)

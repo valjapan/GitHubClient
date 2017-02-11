@@ -44,10 +44,10 @@ class BeautifulListViewAdapter(private val mContext: Context, private val mList:
             holder = convertView.tag as ViewHolder
         }
 
-        holder.idTextView.text = (getItem(position) as Repositories).id.toString()
-        holder.nameTextView.text = (getItem(position) as Repositories).name
-        holder.descriptionTextView.text = (getItem(position) as Repositories).description
-        holder.urlTextView.text = (getItem(position) as Repositories).full_name
+        holder.idTextView.text = (getItem(position) as Repository).id.toString()
+        holder.nameTextView.text = (getItem(position) as Repository).name
+        holder.descriptionTextView.text = (getItem(position) as Repository).description
+        holder.urlTextView.text = (getItem(position) as Repository).full_name
 
         convertView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.item_enter_anim))
 

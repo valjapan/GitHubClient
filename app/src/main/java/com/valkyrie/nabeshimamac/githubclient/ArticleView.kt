@@ -45,7 +45,7 @@ class ArticleView : FrameLayout {
 //        userNameTextView = findViewById(R.id.user_name_text_view) as TextView
 //    }
 
-    fun setArticle(article: Repositories) {
+    fun setArticle(article: Repository) {
         idTextView.text = article.id.toString()
         nameTextView.text = article.name
         descriptionTextView.text = article.description

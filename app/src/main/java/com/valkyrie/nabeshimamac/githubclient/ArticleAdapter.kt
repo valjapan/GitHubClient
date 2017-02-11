@@ -8,7 +8,7 @@ import android.view.ViewGroup
 /**
  * Created by NabeshimaMAC on 2016/12/29.
  */
-class ArticleAdapter(private val context: Context, var articles: List<Repositories> = emptyList()) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter(private val context: Context, var articles: List<Repository> = emptyList()) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     var listener: OnItemClickListener? = null
 
     override fun getItemCount(): Int = articles.size
@@ -30,7 +30,7 @@ class ArticleAdapter(private val context: Context, var articles: List<Repositori
     }
 
     interface OnItemClickListener {
-        fun onItemClick(article: Repositories)
+        fun onItemClick(article: Repository)
     }
 
 }
