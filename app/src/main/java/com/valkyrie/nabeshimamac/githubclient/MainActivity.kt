@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var spinner: Spinner by Delegates.notNull()
     private var searchEditText: EditText by Delegates.notNull()
     private var searchButton: ImageButton by Delegates.notNull()
-    var repositories: Repositories by Delegates.notNull()
+    var repository: Repository by Delegates.notNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         listAdapter = ArticleAdapter(applicationContext).apply {
             listener = object : ArticleAdapter.OnItemClickListener {
-                override fun onItemClick(repositories: Repositories) {
-                    ArticleActivity.intent(this@MainActivity, repositories).let {
+                override fun onItemClick(repository: Repository) {
+                    ArticleActivity.intent(this@MainActivity, repository).let {
                         startActivity(it)
                     }
                 }
@@ -72,14 +72,14 @@ class MainActivity : AppCompatActivity() {
             if (actionId === EditorInfo.IME_ACTION_DONE) {
                 //キーボードを非表示
                 (this@MainActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromInputMethod(searchEditText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-                Repositories.search(searchEditText.text.toString())
+                // Repositories.search(searchEditText.text.toString())
                 true
             }
             false
         }
         searchButton = findViewById(R.id.search_button) as ImageButton
         searchButton.setOnClickListener {
-            repositories.javaClass.superclass.search(searchEditText.text.toString())
+            search(searchEditText.text.toString(), "Java", "stars")
         }
 
     }
@@ -94,5 +94,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun search(searchWord: String, language: String, sort: String) {
 
+        val q: String = "${searchWord}language:${language}"
+
+        Log.d("MAINACTIVITY", q)
+
+        GithubClient.service.searchRepositories(q, sort)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ x ->
+                    searchEditText.text.clear()
+                    listAdapter.articles = x.items
+                    listAdapter.notifyDataSetChanged()
+
+                    Log.d("MAINACTIVITY", x.items.toString())
+                }, { error ->
+                    Log.e("ERROR", error.message)
+                })
+    }
 }

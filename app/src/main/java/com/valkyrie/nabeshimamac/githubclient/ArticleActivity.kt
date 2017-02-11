@@ -14,19 +14,19 @@ class ArticleActivity : AppCompatActivity() {
     companion object {
         private const val REPOSITORIES_EXTRA: String = "article"
 
-        fun intent(context: Context, repositories: Repositories): Intent =
-                Intent(context, ArticleActivity::class.java).putExtra(REPOSITORIES_EXTRA, repositories)
+        fun intent(context: Context, repository: Repository): Intent =
+                Intent(context, ArticleActivity::class.java).putExtra(REPOSITORIES_EXTRA, repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
-        val repositories: Repositories = intent.getParcelableExtra(REPOSITORIES_EXTRA)
+        val repository: Repository = intent.getParcelableExtra(REPOSITORIES_EXTRA)
 
         val markdownView: MarkdownView = findViewById(R.id.markdownView) as MarkdownView
 
         // owner/repos
-        val strList = repositories.full_name.split('/')
+        val strList = repository.full_name.split('/')
         Log.d("LOGGER", "${strList[0]} : ${strList[1]}")
         // strlist[0] + " : " + strlist[1] -> "${strlist[0]} : ${strlist[1]}"
 
