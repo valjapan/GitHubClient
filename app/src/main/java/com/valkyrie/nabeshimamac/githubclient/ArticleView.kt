@@ -30,7 +30,7 @@ class ArticleView : FrameLayout {
         (findViewById(id) as T)
     }
 
-    val idTextView: TextView by bindView(R.id.id_text_view)
+//    val idTextView: TextView by bindView(R.id.id_text_view)
 
     val nameTextView: TextView by bindView(R.id.user_name_text_view)
 
@@ -46,7 +46,7 @@ class ArticleView : FrameLayout {
 //    }
 
     fun setArticle(article: Repository) {
-        idTextView.text = article.id.toString()
+//        idTextView.text = article.id.toString()
         nameTextView.text = article.name
         descriptionTextView.text = article.description
         urlTextView.text = article.full_name

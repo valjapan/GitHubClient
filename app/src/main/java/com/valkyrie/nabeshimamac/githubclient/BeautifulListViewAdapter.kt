@@ -44,7 +44,7 @@ class BeautifulListViewAdapter(private val mContext: Context, private val mList:
             holder = convertView.tag as ViewHolder
         }
 
-        holder.idTextView.text = (getItem(position) as Repository).id.toString()
+//        holder.idTextView.text = (getItem(position) as Repository).id.toString()
         holder.nameTextView.text = (getItem(position) as Repository).name
         holder.descriptionTextView.text = (getItem(position) as Repository).description
         holder.urlTextView.text = (getItem(position) as Repository).full_name
@@ -56,13 +56,13 @@ class BeautifulListViewAdapter(private val mContext: Context, private val mList:
 
     class ViewHolder(view: View) {
 
-        internal var idTextView: TextView
+//        internal var idTextView: TextView
         internal var nameTextView: TextView
         internal var descriptionTextView: TextView
         internal var urlTextView: TextView
 
         init {
-            idTextView = view.findViewById(R.id.id_text_view) as TextView
+//            idTextView = view.findViewById(R.id.id_text_view) as TextView
             nameTextView = view.findViewById(R.id.user_name_text_view) as TextView
             descriptionTextView = view.findViewById(R.id.description_text_view) as TextView
             urlTextView = view.findViewById(R.id.url_text_view) as TextView

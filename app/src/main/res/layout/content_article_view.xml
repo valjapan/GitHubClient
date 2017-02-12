@@ -13,26 +13,25 @@
     tools:context="com.valkyrie.nabeshimamac.githubclient.MainActivity">
 
 
-    <TextView
-        android:id="@+id/id_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        tools:text="ID" />
+    <!--<TextView-->
+        <!--android:id="@+id/id_text_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:ellipsize="end"-->
+        <!--android:maxLines="2"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="18sp"-->
+        <!--tools:text="ID" />-->
 
     <TextView
         android:id="@+id/user_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/id_text_view"
-        android:layout_below="@+id/id_text_view"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="20sp"
         tools:text="ユーザの名前" />
 
     <TextView
@@ -43,7 +42,7 @@
         android:layout_below="@+id/user_name_text_view"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         tools:text="Description"/>
 
     <TextView
