@@ -5,6 +5,7 @@ import android.support.annotation.IdRes
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 
 class ArticleView : FrameLayout {
@@ -30,13 +31,15 @@ class ArticleView : FrameLayout {
         (findViewById(id) as T)
     }
 
-    val idTextView: TextView by bindView(R.id.id_text_view)
+//    val idTextView: TextView by bindView(R.id.id_text_view)
 
     val nameTextView: TextView by bindView(R.id.user_name_text_view)
 
     val descriptionTextView: TextView by bindView(R.id.description_text_view)
 
     val urlTextView: TextView by bindView(R.id.url_text_view)
+
+    val avatarIcon: ImageView by bindView(R.id.avatar_icon)
 
 //    init {
 //        LayoutInflater.from(context).inflate(R.layout.content_article_view, this)
@@ -45,8 +48,8 @@ class ArticleView : FrameLayout {
 //        userNameTextView = findViewById(R.id.user_name_text_view) as TextView
 //    }
 
-    fun setArticle(article: Repositories) {
-        idTextView.text = article.id.toString()
+    fun setArticle(article: Repository) {
+//        idTextView.text = article.id.toString()
         nameTextView.text = article.name
         descriptionTextView.text = article.description
         urlTextView.text = article.full_name

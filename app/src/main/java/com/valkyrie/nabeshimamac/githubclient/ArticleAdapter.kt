@@ -4,11 +4,12 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 
 /**
  * Created by NabeshimaMAC on 2016/12/29.
  */
-class ArticleAdapter(private val context: Context, var articles: List<Repositories> = emptyList()) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter(private val context: Context, var articles: List<Repository> = emptyList()) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     var listener: OnItemClickListener? = null
 
     override fun getItemCount(): Int = articles.size
@@ -22,6 +23,7 @@ class ArticleAdapter(private val context: Context, var articles: List<Repositori
             it.itemView.setOnClickListener {
                 listener?.onItemClick(articles[position])
             }
+            Picasso.with(context).load(articles[position].owner.avatar_url).into(it.articleView.avatarIcon)
         }
     }
 
@@ -30,7 +32,7 @@ class ArticleAdapter(private val context: Context, var articles: List<Repositori
     }
 
     interface OnItemClickListener {
-        fun onItemClick(article: Repositories)
+        fun onItemClick(article: Repository)
     }
 
 }

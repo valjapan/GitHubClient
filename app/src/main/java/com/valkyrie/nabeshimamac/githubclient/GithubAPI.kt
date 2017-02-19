@@ -10,11 +10,12 @@ import rx.Observable
  */
 interface GithubAPI {
     @GET("/repositories?sort=stars&order=desc")
-    fun newRepositories(): Observable<List<Repositories>>
+    fun newRepositories(): Observable<List<Repository>>
 
     @GET("/repos/{owner}/{repo}/readme")
     fun getReadMe(@Path("owner") owner: String, @Path("repo") repo: String): Observable<ReadMe>
 
-    @GET("https://api.github.com/search/repositories?q={search_word}&sort=stars&order=desc")
-    fun searchRepositories(@Query("search_word") searchWord: String): Observable<Repositories>
+    //@GET("/search/repositories?order=desc")
+    @GET("/search/repositories?order=desc")
+    fun searchRepositories(@Query("q") searchWord: String, @Query("sort") sort: String): Observable<Repositories>
 }
