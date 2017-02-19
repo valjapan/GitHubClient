@@ -5,6 +5,7 @@ import android.support.annotation.IdRes
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 
 class ArticleView : FrameLayout {
@@ -37,6 +38,8 @@ class ArticleView : FrameLayout {
     val descriptionTextView: TextView by bindView(R.id.description_text_view)
 
     val urlTextView: TextView by bindView(R.id.url_text_view)
+
+    val avatarIcon: ImageView by bindView(R.id.avatar_icon)
 
 //    init {
 //        LayoutInflater.from(context).inflate(R.layout.content_article_view, this)

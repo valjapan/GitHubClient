@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 
 /**
  * Created by NabeshimaMAC on 2016/12/29.
@@ -22,6 +23,7 @@ class ArticleAdapter(private val context: Context, var articles: List<Repository
             it.itemView.setOnClickListener {
                 listener?.onItemClick(articles[position])
             }
+            Picasso.with(context).load(articles[position].owner.avatar_url).into(it.articleView.avatarIcon)
         }
     }
 

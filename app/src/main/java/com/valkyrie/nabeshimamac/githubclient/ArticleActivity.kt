@@ -21,7 +21,7 @@ class ArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
-        val repository: Repository = intent.getParcelableExtra(REPOSITORIES_EXTRA)
+        val repository: Repository = intent.getSerializableExtra(REPOSITORIES_EXTRA) as Repository
 
         val markdownView: MarkdownView = findViewById(R.id.markdownView) as MarkdownView
 

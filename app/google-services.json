@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1016857074614",
+    "firebase_url": "https://github-bf33c.firebaseio.com",
+    "project_id": "github-bf33c",
+    "storage_bucket": "github-bf33c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016857074614:android:f941e886f6cfb8c7",
+        "android_client_info": {
+          "package_name": "com.valkyrie.nabeshimamac.githubclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016857074614-a9138h2g8876u6nq78ut9rpu569ur3cb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf0FuoCILp7M3d827RUKNH97m5O3aX1Qk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

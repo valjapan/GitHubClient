@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import kotlin.properties.Delegates
@@ -22,13 +24,14 @@ class MainActivity : AppCompatActivity() {
     private var spinner: Spinner by Delegates.notNull()
     private var searchEditText: EditText by Delegates.notNull()
     private var searchButton: ImageButton by Delegates.notNull()
+    private var avatarIcon: ImageView by Delegates.notNull()
     var repository: Repository by Delegates.notNull()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listAdapter = ArticleAdapter(applicationContext).apply {
+        listAdapter = ArticleAdapter(this).apply {
             listener = object : ArticleAdapter.OnItemClickListener {
                 override fun onItemClick(repository: Repository) {
                     ArticleActivity.intent(this@MainActivity, repository).let {
@@ -57,7 +60,10 @@ class MainActivity : AppCompatActivity() {
         searchEditText = findViewById(R.id.search_edit_text) as EditText
 
         listView.layoutManager = LinearLayoutManager(this)
-        listView.adapter = listAdapter
+        val animationAdapter: AlphaInAnimationAdapter = AlphaInAnimationAdapter(listAdapter)
+        animationAdapter.setDuration(1000)
+        animationAdapter.setInterpolator(OvershootInterpolator())
+        listView.adapter = animationAdapter
 
         spinner = findViewById(R.id.code_spinner) as Spinner
 
