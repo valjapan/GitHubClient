@@ -3,6 +3,7 @@ package com.valkyrie.nabeshimamac.githubclient
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import rx.android.schedulers.AndroidSchedulers
@@ -37,6 +38,13 @@ class ArticleActivity : AppCompatActivity() {
                     markdownView.loadMarkdownFile(x.download_url)
                 }, { error ->
                     Log.e("ERROR", error.message)
+                    AlertDialog.Builder(this)
+                            .setTitle("ERROR")
+                            .setMessage(error.message)
+                            .setPositiveButton("OK", { dialogInterface, i ->
+                                finish()
+                            })
+                            .show()
                 })
     }
 }
